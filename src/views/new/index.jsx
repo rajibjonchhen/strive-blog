@@ -41,13 +41,35 @@ const NewBlogPost = ({fetchPosts, posts}) => {
       })
       if(response.ok){
         let data  = await response.json();
-        fetchPosts()
+       if(data){
+        uploadImage(data.id)
+       }
       }else {
         console.log("error on new posts")
       }
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const uploadImage = async(id) => {
+    const formData = new FormData()
+    formData.append('cover',this.state.selectedFile)
+    let url = process.env.REACT_APP_BE_URL
+   try {
+    let response = await fetch(`${url}/blogs/${id}`, {
+      method:'PUT',
+    })
+    if(response.ok){
+      let data = await response.json()
+      fetchPosts()
+      console.log(data)
+    }else{
+      
+    }
+   } catch (error) {
+    console.log(error)
+   }
   }
   
   
