@@ -4,6 +4,7 @@ import BlogList from "../../components/blog/blog-list";
 import "./styles.css";
 
 export default class Home extends Component {
+  
   render() {
     return (
       <Container fluid="sm">

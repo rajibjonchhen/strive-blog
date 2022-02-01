@@ -22,6 +22,7 @@ export default class NewBlogPost extends Component {
             <Form.Label>Title</Form.Label>
             <Form.Control size="lg" placeholder="Title" />
           </Form.Group>
+         <div>
           <Form.Group controlId="blog-category" className="mt-3">
             <Form.Label>Category</Form.Label>
             <Form.Control size="lg" as="select">
@@ -30,8 +31,13 @@ export default class NewBlogPost extends Component {
               <option>Category3</option>
               <option>Category4</option>
               <option>Category5</option>
-            </Form.Control>
+          </Form.Control>
           </Form.Group>
+            <div className='d-flex mt-3 flex-column'>
+          <Form.Label>Choose Image to upload</Form.Label>
+        <input type='file' style={{height:'30px'}}/>
+            </div>
+         </div>
           <Form.Group controlId="blog-content" className="mt-3">
             <Form.Label>Blog Content</Form.Label>
             <ReactQuill
