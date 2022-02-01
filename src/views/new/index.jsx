@@ -6,12 +6,30 @@ import "./styles.css";
 export default class NewBlogPost extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: "" };
+    this.state = { 
+      text: "",
+      posts:{},
+      file:null
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(value) {
     this.setState({ text: value });
+  }
+
+  fetchData = async() => {
+    let url = process.env.BE_PROD_URL
+    let response = await fetch(url, {
+      method:'POST'
+    })
+    if(response.ok){
+      let data = await response.json()
+      this.setState({posts:data})
+      console.log(data)
+    }else{
+      
+    }
   }
 
   render() {
@@ -20,12 +38,12 @@ export default class NewBlogPost extends Component {
         <Form className="mt-5">
           <Form.Group controlId="blog-form" className="mt-3">
             <Form.Label>Title</Form.Label>
-            <Form.Control size="lg" placeholder="Title" />
+            <Form.Control size="lg" placeholder="Title" onChange={(e)=> this.setState({...this.state.posts, title:e.target.value})}/>
           </Form.Group>
          <div>
           <Form.Group controlId="blog-category" className="mt-3">
             <Form.Label>Category</Form.Label>
-            <Form.Control size="lg" as="select">
+            <Form.Control size="lg" as="select" onChange={(e)=> this.setState({...this.state.posts, category:e.target.value})}>
               <option>Category1</option>
               <option>Category2</option>
               <option>Category3</option>
@@ -35,7 +53,7 @@ export default class NewBlogPost extends Component {
           </Form.Group>
             <div className='d-flex mt-3 flex-column'>
           <Form.Label>Choose Image to upload</Form.Label>
-        <input type='file' style={{height:'30px'}}/>
+          <input type='file' style={{height:'30px'}} onChange={(e)=> this.setState({file:e.target.files[0]})}/>
             </div>
          </div>
           <Form.Group controlId="blog-content" className="mt-3">
@@ -44,6 +62,7 @@ export default class NewBlogPost extends Component {
               value={this.state.text}
               onChange={this.handleChange}
               className="new-blog-content"
+              
             />
           </Form.Group>
           <Form.Group className="d-flex mt-3 justify-content-end">

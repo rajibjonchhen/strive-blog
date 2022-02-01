@@ -8,17 +8,18 @@ export default class BlogList extends Component {
   }
   
   componentDidMount = () => {
-    // this.fetchData()
+    this.fetchData()
   }
   
-  fetch = async() => {
-    let url = process.env.REACT_APP_BE_URL
+  fetchData = async() => {
+    let url = process.env.BE_PROD_URL
     let response = await fetch(url, {
-      method:'GET'
+      method:'GET',
     })
     if(response.ok){
       let data = await response.json()
       this.setState({posts:data})
+      console.log(data)
     }else{
       
     }
