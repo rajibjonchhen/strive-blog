@@ -13,6 +13,7 @@ export default class BlogList extends Component {
   
   fetchData = async() => {
     let url = process.env.REACT_APP_BE_URL
+   try {
     let response = await fetch(`${url}/blogs`, {
       method:'GET',
     })
@@ -23,6 +24,9 @@ export default class BlogList extends Component {
     }else{
       
     }
+   } catch (error) {
+    console.log(error)
+   }
   }
   render() {
     return (

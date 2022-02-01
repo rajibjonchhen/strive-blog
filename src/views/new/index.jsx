@@ -1,69 +1,96 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import { Container, Form, Button } from "react-bootstrap";
 import "./styles.css";
-export default class NewBlogPost extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-      text: "",
-      posts:{},
-      file:null
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
 
-  handleChange(value) {
-    this.setState({ text: value });
-  }
-
-  fetchData = async() => {
-    let url = process.env.REACT_APP_BE_URL
-    let response = await fetch(`${url}/blogs`, {
-      method:'POST'
-    })
-    if(response.ok){
-      let data = await response.json()
-      this.setState({posts:data})
-      console.log(data)
-    }else{
+const NewBlogPost = ({fetchPosts, posts}) => {
+  const [selectedFile, setSelectedFile] = useState()
+  const [post, setPost] = useState( {
+    category: "",
+    title: "",
+    cover: "",
+    readTime: {
+        value: null,
+        unit: ""
+    },
+    author: {
+        name: "",
+        avatar: ""
+    },
+    content: "html",
+        } 
+)
       
+  useEffect(()=>{},[])
+
+  const handleChange = (e) => {
+    setSelectedFile (e.target.files[0])
+  }
+  
+  const writePost = async() => {
+    let url = process.env.REACT_APP_BE_URL
+    try {
+      let response = await fetch(`${url}/blogs`, {
+        method:"POST",
+        body: JSON.stringify(post),
+      header:{
+        "content-type":"application/JSON"
+      }
+
+      })
+      if(response.ok){
+        let data  = await response.json();
+        fetchPosts()
+      }else {
+        console.log("error on new posts")
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
-
-  render() {
+  
+  
+  
+    
     return (
       <Container className="new-blog-container">
         <Form className="mt-5">
-          <Form.Group controlId="blog-form" className="mt-3">
-            <Form.Label>Title</Form.Label>
-            <Form.Control size="lg" placeholder="Title" onChange={(e)=> this.setState({...this.state.posts, title:e.target.value})}/>
+          <Form.Group controlId="blog-form" className="m-3">
+            <Form.Label >Title</Form.Label>
+            <Form.Control value={post.title} onChange={(e) => setPost({...post ,title:e.target.value})} size="lg" placeholder="Title" />
           </Form.Group>
-         <div>
-          <Form.Group controlId="blog-category" className="mt-3">
+          <div className="d-flex">
+          <Form.Group controlId="blog-category" className="m-3">
             <Form.Label>Category</Form.Label>
-            <Form.Control size="lg" as="select" onChange={(e)=> this.setState({...this.state.posts, category:e.target.value})}>
-              <option>Category1</option>
-              <option>Category2</option>
-              <option>Category3</option>
-              <option>Category4</option>
+            <Form.Control size="lg" as="select" value={post.category} onChange={(e) => setPost({...post, category:e.target.value})}>
+              <option>Horror</option>
+              <option>Romantic</option>
+              <option>History</option>
+              <option>Scifi</option>
               <option>Category5</option>
-          </Form.Control>
+            </Form.Control>
           </Form.Group>
-            <div className='d-flex mt-3 flex-column'>
-          <Form.Label>Choose Image to upload</Form.Label>
-          <input type='file' style={{height:'30px'}} onChange={(e)=> this.setState({file:e.target.files[0]})}/>
-            </div>
-         </div>
-          <Form.Group controlId="blog-content" className="mt-3">
-            <Form.Label>Blog Content</Form.Label>
-            <ReactQuill
-              value={this.state.text}
-              onChange={this.handleChange}
-              className="new-blog-content"
-              
+          {/* <Form.Group controlId="blog-author" className="m-3">
+            <Form.Label >Author</Form.Label>
+            <Form.Control value={post} onChange={(e) => setPost({...post ,author:{...post.author,name:e.target.value}})} size="lg" placeholder="Author" />
+          </Form.Group> */}
+          </div>
+          <Form.Group className='d-flex flex-column m-3'>
+          <Form.Label >Upload Image</Form.Label>
+            <input
+              style={{height:'50px'}}
+              type='file'
+              onChange={(e) => handleChange(e)}
+              // isInvalid={!!errors.file}
+              // feedback={errors.file}
+              id="validationFormik107"
+              feedbackTooltip
             />
+          </Form.Group>
+          <Form.Group controlId="blog-content" className="m-3">
+            <Form.Label>Blog Content</Form.Label>
+            <ReactQuill value={post.content} onChange={(html) => setPost({content:html})} className="new-blog-content" placeholder="write the blog here"/>
           </Form.Group>
           <Form.Group className="d-flex mt-3 justify-content-end">
             <Button type="reset" size="lg" variant="outline-dark">
@@ -81,5 +108,6 @@ export default class NewBlogPost extends Component {
         </Form>
       </Container>
     );
-  }
+  
 }
+export default NewBlogPost
