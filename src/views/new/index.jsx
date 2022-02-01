@@ -19,7 +19,7 @@ export default class NewBlogPost extends Component {
   }
 
   fetchData = async() => {
-    let url = process.env.BE_PROD_URL
+    let url = process.env.REACT_APP_BE_URL
     let response = await fetch(`${url}/blogs`, {
       method:'POST'
     })
