@@ -5,7 +5,8 @@ import { Container, Form, Button } from "react-bootstrap";
 import "./styles.css";
 
 const NewBlogPost = ({fetchPosts, posts}) => {
-  const [selectedFile, setSelectedFile] = useState()
+  const [coverImg, setCoverImg] = useState()
+  const [avatarImg, setAvatarImg] = useState()
   const [post, setPost] = useState( {
     category: "",
     title: "",
@@ -24,11 +25,16 @@ const NewBlogPost = ({fetchPosts, posts}) => {
       
   useEffect(()=>{},[])
 
-  const handleChange = (e) => {
-    setSelectedFile (e.target.files[0])
+  const handleChangeCover = (e) => {
+    setCoverImg (e.target.files[0])
+  }
+  {/* for changing avatar */}
+  const handleChangeAvatar = (e) => {
+    setCoverImg (e.target.files[0])
   }
   
-  const writePost = async() => {
+  const writePost = async(e) => {
+    e.preventDefault()
     let url = process.env.REACT_APP_BE_URL
     try {
       let response = await fetch(`${url}/blogs`, {
@@ -42,7 +48,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
       if(response.ok){
         let data  = await response.json();
        if(data){
-        uploadImage(data.id)
+        uploadCover(data.id)
        }
       }else {
         console.log("error on new posts")
@@ -52,12 +58,12 @@ const NewBlogPost = ({fetchPosts, posts}) => {
     }
   }
 
-  const uploadImage = async(id) => {
+  const uploadCover = async(id) => {
     const formData = new FormData()
-    formData.append('cover',this.state.selectedFile)
+    formData.append('image',this.state.selectedFile)
     let url = process.env.REACT_APP_BE_URL
    try {
-    let response = await fetch(`${url}/blogs/${id}`, {
+    let response = await fetch(`${url}/blogs/${id}/cloudinaryUploadCover`, {
       method:'PUT',
     })
     if(response.ok){
@@ -71,6 +77,28 @@ const NewBlogPost = ({fetchPosts, posts}) => {
     console.log(error)
    }
   }
+{/* for changing avatar */}
+  // const uploadAvatar = async(id) => {
+  //   const formData = new FormData()
+  //   formData.append('image',this.state.selectedFile)
+  //   let url = process.env.REACT_APP_BE_URL
+  //  try {
+  //   let response = await fetch(`${url}/blogs/${id}/cloudinaryUploadAvatar`, {
+  //     method:'PUT',
+  //   })
+  //   if(response.ok){
+  //     let data = await response.json()
+  //     fetchPosts()
+  //     console.log(data)
+  //   }else{
+      
+  //   }
+  //  } catch (error) {
+  //   console.log(error)
+  //  }
+  // }
+
+
   
   
   
@@ -99,17 +127,30 @@ const NewBlogPost = ({fetchPosts, posts}) => {
           </Form.Group> */}
           </div>
           <Form.Group className='d-flex flex-column m-3'>
-          <Form.Label >Upload Image</Form.Label>
+          <Form.Label >Upload Cover Image</Form.Label>
             <input
               style={{height:'50px'}}
               type='file'
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleChangeCover(e)}
               // isInvalid={!!errors.file}
               // feedback={errors.file}
               id="validationFormik107"
               feedbackTooltip
             />
           </Form.Group>
+{/* for changing avatar */}
+          {/* <Form.Group className='d-flex flex-column m-3'>
+          <Form.Label >Upload Avatar </Form.Label>
+            <input
+              style={{height:'50px'}}
+              type='file'
+              onChange={(e) => handleChangeAvatar(e)}
+              // isInvalid={!!errors.file}
+              // feedback={errors.file}
+              id="validationFormik107"
+              feedbackTooltip
+            />
+          </Form.Group> */}
           <Form.Group controlId="blog-content" className="m-3">
             <Form.Label>Blog Content</Form.Label>
             <ReactQuill value={post.content} onChange={(html) => setPost({content:html})} className="new-blog-content" placeholder="write the blog here"/>
@@ -119,10 +160,11 @@ const NewBlogPost = ({fetchPosts, posts}) => {
               Reset
             </Button>
             <Button
-              type="submit"
+              type="button"
               size="lg"
               variant="dark"
               style={{ marginLeft: "1em" }}
+              onClick={(e)=>writePost(e)}
             >
               Submit
             </Button>
