@@ -41,7 +41,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
       let response = await fetch(`${url}/blogs`, {
         method:"POST",
         body: JSON.stringify(post),
-      headers:{
+        headers:{
         "Content-Type":"application/json"
       }
 
@@ -84,27 +84,27 @@ const NewBlogPost = ({fetchPosts, posts}) => {
    }
   }
 {/* for changing avatar */}
-  // const uploadAvatar = async(id) => {
-  //   const formData = new FormData()
-  //   formData.append('image',this.state.selectedFile)
-  //   let url = process.env.REACT_APP_BE_URL
-  //  try {
-  //   let response = await fetch(`${url}/blogs/${id}/cloudinaryUploadAvatar`, {
-  //     method:'PUT',
-          // body:formData
+  const uploadAvatar = async(id) => {
+    const formData = new FormData()
+    formData.append('image',this.state.selectedFile)
+    let url = process.env.REACT_APP_BE_URL
+   try {
+    let response = await fetch(`${url}/blogs/${id}/cloudinaryUploadAvatar`, {
+      method:'PUT',
+      body:formData
 
-  //   })
-  //   if(response.ok){
-  //     let data = await response.json()
-  //     fetchPosts()
-  //     console.log(data)
-  //   }else{
+    })
+    if(response.ok){
+      let data = await response.json()
+      fetchPosts()
+      console.log(data)
+    }else{
       
-  //   }
-  //  } catch (error) {
-  //   console.log(error)
-  //  }
-  // }
+    }
+   } catch (error) {
+    console.log(error)
+   }
+  }
 
 
   
@@ -147,7 +147,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
             />
           </Form.Group>
 {/* for changing avatar */}
-          {/* <Form.Group className='d-flex flex-column m-3'>
+          <Form.Group className='d-flex flex-column m-3'>
           <Form.Label >Upload Avatar </Form.Label>
             <input
               style={{height:'50px'}}
@@ -158,7 +158,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
               id="validationFormik107"
               feedbackTooltip
             />
-          </Form.Group> */}
+          </Form.Group>
           <Form.Group controlId="blog-content" className="m-3">
             <Form.Label>Blog Content</Form.Label>
             <ReactQuill value={post.content} onChange={(html) => setPost({...post,content:html})} className="new-blog-content" placeholder="write the blog here"/>
