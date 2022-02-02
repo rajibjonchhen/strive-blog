@@ -68,6 +68,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
    try {
     let response = await fetch(`${url}/blogs/${id}/cloudinaryUploadCover`, {
       method:'PUT',
+      body:formData
     })
     if(response.ok){
       let data = await response.json()
@@ -88,6 +89,8 @@ const NewBlogPost = ({fetchPosts, posts}) => {
   //  try {
   //   let response = await fetch(`${url}/blogs/${id}/cloudinaryUploadAvatar`, {
   //     method:'PUT',
+          // body:formData
+
   //   })
   //   if(response.ok){
   //     let data = await response.json()
