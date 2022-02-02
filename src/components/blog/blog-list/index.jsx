@@ -7,8 +7,8 @@ export default class BlogList extends Component {
     posts:[]
   }
   
-  componentDidMount = () => {
-    this.fetchData()
+  componentDidMount = async() => {
+    await this.fetchData()
   }
   
   fetchData = async() => {
@@ -16,7 +16,6 @@ export default class BlogList extends Component {
    try {
     let response = await fetch(`${url}/blogs`, {
       method:'GET',
-      mode:'cors'
     })
     if(response.ok){
       let data = await response.json()

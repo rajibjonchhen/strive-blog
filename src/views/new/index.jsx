@@ -26,11 +26,11 @@ const NewBlogPost = ({fetchPosts, posts}) => {
   useEffect(()=>{},[])
 
   const handleChangeCover = (e) => {
-    setCoverImg (e.target.files[0])
+    setCoverImg(e.target.files[0])
   }
   {/* for changing avatar */}
   const handleChangeAvatar = (e) => {
-    setCoverImg (e.target.files[0])
+    setCoverImg(e.target.files[0])
   }
   
   const writePost = async(e) => {
@@ -48,7 +48,8 @@ const NewBlogPost = ({fetchPosts, posts}) => {
       if(response.ok){
         let data  = await response.json();
        if(data){
-        uploadCover(data.blogId)
+         console.log(data)
+        await uploadCover(data.blogId)
        }
       }else {
         console.log("error on new posts")
@@ -59,8 +60,10 @@ const NewBlogPost = ({fetchPosts, posts}) => {
   }
 
   const uploadCover = async(id) => {
+    console.log("ID: ", coverImg)
     const formData = new FormData()
-    formData.append('image',this.state.selectedFile)
+    formData.append('image',coverImg)
+    console.log(formData)
     let url = process.env.REACT_APP_BE_URL
    try {
     let response = await fetch(`${url}/blogs/${id}/cloudinaryUploadCover`, {
@@ -68,7 +71,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
     })
     if(response.ok){
       let data = await response.json()
-      fetchPosts()
+      await fetchPosts()
       console.log(data)
     }else{
       
