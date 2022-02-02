@@ -41,7 +41,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
       let response = await fetch(`${url}/blogs`, {
         method:"POST",
         body: JSON.stringify(post),
-      header:{
+      headers:{
         "Content-Type":"application/json"
       }
 
