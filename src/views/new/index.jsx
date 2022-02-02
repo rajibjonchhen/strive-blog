@@ -48,7 +48,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
       if(response.ok){
         let data  = await response.json();
        if(data){
-        uploadCover(data.id)
+        uploadCover(data.blogId)
        }
       }else {
         console.log("error on new posts")
