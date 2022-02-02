@@ -13,7 +13,6 @@ export default class BlogAuthor extends Component {
         <Col>
           <div>by</div>
           <h6>{name}</h6>
-          <h6>{id}</h6>
         </Col>
         <Col>
         <a href={`${process.env.REACT_APP_BE_URL}/blogs/${blogId}/pdf`}>
