@@ -129,10 +129,10 @@ const NewBlogPost = ({fetchPosts, posts}) => {
               <option>Category5</option>
             </Form.Control>
           </Form.Group>
-          {/* <Form.Group controlId="blog-author" className="m-3">
+          <Form.Group controlId="blog-author" className="m-3">
             <Form.Label >Author</Form.Label>
-            <Form.Control value={post} onChange={(e) => setPost({...post ,author:{...post.author,name:e.target.value}})} size="lg" placeholder="Author" />
-          </Form.Group> */}
+            <Form.Control value={post.author.name} onChange={(e) => setPost({...post ,author:{...post.author,name:e.target.value}})} size="lg" placeholder="Author" />
+          </Form.Group>
           </div>
           <Form.Group className='d-flex flex-column m-3'>
           <Form.Label >Upload Cover Image</Form.Label>
@@ -161,7 +161,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
           </Form.Group> */}
           <Form.Group controlId="blog-content" className="m-3">
             <Form.Label>Blog Content</Form.Label>
-            <ReactQuill value={post.content} onChange={(html) => setPost({content:html})} className="new-blog-content" placeholder="write the blog here"/>
+            <ReactQuill value={post.content} onChange={(html) => setPost({...post,content:html})} className="new-blog-content" placeholder="write the blog here"/>
           </Form.Group>
           <Form.Group className="d-flex mt-3 justify-content-end">
             <Button type="reset" size="lg" variant="outline-dark">
