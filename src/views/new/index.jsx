@@ -35,6 +35,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
   
   const writePost = async(e) => {
     e.preventDefault()
+    console.log(post)
     let url = process.env.REACT_APP_BE_URL
     try {
       let response = await fetch(`${url}/blogs`, {
@@ -60,7 +61,8 @@ const NewBlogPost = ({fetchPosts, posts}) => {
   }
 
   const uploadCover = async(id) => {
-    console.log("ID: ", coverImg)
+    console.log("ID: ", id)
+    console.log("cover Image data: ", coverImg)
     const formData = new FormData()
     formData.append('image',coverImg)
     console.log(formData)
