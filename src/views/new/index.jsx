@@ -73,7 +73,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
       body:formData
     })
     if(response.ok){
-      let data = await response.json()
+       
       await fetchPosts()
       console.log(data)
     }else{
