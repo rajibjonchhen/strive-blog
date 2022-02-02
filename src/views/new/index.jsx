@@ -42,7 +42,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
         method:"POST",
         body: JSON.stringify(post),
       header:{
-        "content-type":"application/JSON"
+        "Content-Type":"application/json"
       }
 
       })
