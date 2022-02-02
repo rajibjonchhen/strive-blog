@@ -51,7 +51,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
        if(data){
          console.log(data)
         await uploadCover(data.blogId)
-        await uploadAvatar(data.blodId)
+        await uploadAvatar(data.blogId)
        }
       }else {
         console.log("error on new posts")
