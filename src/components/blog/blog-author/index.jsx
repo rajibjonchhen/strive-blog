@@ -3,7 +3,7 @@ import { Row, Col, Image } from "react-bootstrap";
 import "./styles.css";
 export default class BlogAuthor extends Component {
   render() {
-    const { name, avatar, id } = this.props;
+    const { name, avatar, blogId } = this.props;
 
     return (
       <Row>
@@ -16,7 +16,7 @@ export default class BlogAuthor extends Component {
           <h6>{id}</h6>
         </Col>
         <Col>
-        <a href={`${process.env.REACT_APP_BE_URL}/blogs/${id}/downloadpdf`}>
+        <a href={`${process.env.REACT_APP_BE_URL}/blogs/${blogId}/pdf`}>
         <button  type="button" className="bg-warning text-white">Download</button>
         </a>
         </Col>
