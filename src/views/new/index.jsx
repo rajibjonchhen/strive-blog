@@ -75,7 +75,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
     if(response.ok){
        
       await fetchPosts()
-      console.log(data)
+      
     }else{
       
     }
