@@ -8,7 +8,7 @@ export default class BlogAuthor extends Component {
     return (
       <Row>
         <Col xs={2}>
-          <Image className="blog-author" src="{avatar}" roundedCircle />
+          <Image className="blog-author" src={avatar} roundedCircle />
         </Col>
         <Col>
           <div>by</div>
@@ -16,7 +16,9 @@ export default class BlogAuthor extends Component {
           <h6>{id}</h6>
         </Col>
         <Col>
-        <button type="button" className="bg-warning text-white">Download</button>
+        <a href={`${process.env.REACT_APP_BE_URL}/blogs/${id}/downloadpdf`}>
+        <button  type="button" className="bg-warning text-white">Download</button>
+        </a>
         </Col>
       </Row>
     );
