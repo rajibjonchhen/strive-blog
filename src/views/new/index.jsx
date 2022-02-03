@@ -148,13 +148,13 @@ const NewBlogPost = ({fetchPosts, posts}) => {
           </Form.Group>
           <Form.Group controlId="blog-author" className="m-3">
             <Form.Label >Author</Form.Label>
-            <Form.Control value={post.author.name} onChange={(e) => setPost({...post ,author:{...post.author,name:e.target.value}})} size="lg" placeholder="Author" />
+            <Form.Control value={post.author.name} onChange={(e) => setPost({...post ,author:{...post.author,name:e.target.value}})} size="lg" placeholder="Author name" />
           </Form.Group>
-          </div>
           <Form.Group controlId="blog-author" className="m-3">
           <Form.Label >Email</Form.Label>
-            <Form.Control value={post.author.email} onChange={(e) => setPost({...post ,author:{...post.author,email:e.target.value}})} size="lg" placeholder="Author" />
+            <Form.Control value={post.author.email} onChange={(e) => setPost({...post ,author:{...post.author,email:e.target.value}})} size="lg" placeholder="Email" />
           </Form.Group>
+          </div>
           <Form.Group className='d-flex flex-column m-3'>
           <Form.Label >Upload Cover Image</Form.Label>
             <input
