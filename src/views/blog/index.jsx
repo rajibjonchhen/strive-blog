@@ -11,7 +11,7 @@ class Blog extends Component {
     loading: true,
   };
   componentDidMount() {
-    const { id } = this.props.match.params;
+    const id  = this.props.match.params;
     console.log(posts);
     const blog = posts.find((post) => post._id.toString() === id);
     if (blog) {
@@ -53,4 +53,4 @@ class Blog extends Component {
   }
 }
 
-export default withRouter(Blog);
+export default Blog;
