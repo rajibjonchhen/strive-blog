@@ -16,7 +16,7 @@ function App() {
       <Route path="/" exact component={Home} />
       <Route path="/blog/:id" exact component={Blog} />
       <Route path="/new" exact component={NewBlogPost} />
-      {/* <Route path="*"  component={Error404} /> */}
+      <Route path="*"  component={Error404} />
 
       <Footer />
     </BrowserRouter>
