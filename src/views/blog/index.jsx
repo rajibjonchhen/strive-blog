@@ -1,37 +1,44 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Image } from "react-bootstrap";
 // import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
 import BlogLike from "../../components/likes/BlogLike";
-import posts from "../../data/posts.json";
+// import posts from "../../data/posts.json";
 import "./styles.css";
-class Blog extends Component {
-  state = {
-    blog: {},
-    loading: true,
-  };
-  componentDidMount() {
-    // const id  = this.props.match.params;
-    const search = this.props.location.search;
-    const id = new URLSearchParams(search).get("blogId");
 
-    console.log(posts);
-    const blog = posts.find((post) => post.blogId.toString() === id);
-    if (blog) {
-      this.setState({ blog, loading: false });
-    } else {
-      this.props.history.push("/404");
+const Blog = (props) => {
+const [blog, setBlog]  = useState({}) 
+const [loading,setLoading] = useState(true)
+
+
+  useEffect(()=>{
+    const blogId = props.params.blodId
+    fetchBlog(blogId)
+  },[])
+
+  const fetchBlog = async(blogId) => {
+    let url = process.env.REACT_APP_BE_URL
+    try {
+    let response = await fetch(`${url}/blogs/${blogId}`, {
+      method:'GET',
+    })
+    if(response.ok){
+      let data = await response.json()
+      setBlog(data)
+      console.log(data)
+      setLoading(false)
+    }else{
+      setLoading(false)
+    }
+  } catch (error) {
+    console.log(error)
+    setLoading(false)
     }
   }
 
-  render() {
-    const { loading, blog } = this.state;
-    if (loading) {
-      return <div>loading</div>;
-    } else {
       return (
         <div className="blog-details-root">
-          <Container>
+          {!blog && !loading? (<Container>
             <Image className="blog-details-cover" src={blog.cover} fluid />
             <h1 className="blog-details-title">{blog.title}</h1>
 
@@ -49,11 +56,10 @@ class Blog extends Component {
             </div>
 
             <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
-          </Container>
+          </Container>):(<h1>Loading</h1>)}
         </div>
-      );
-    }
-  }
+      )
+      
 }
 
 export default Blog;
