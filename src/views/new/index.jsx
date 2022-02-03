@@ -51,7 +51,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
        if(data){
          console.log(data)
         await uploadCover(data.blogId)
-        await uploadAvatar(data.blogId)
+      
        }
       }else {
         console.log("error on new posts")
@@ -74,7 +74,8 @@ const NewBlogPost = ({fetchPosts, posts}) => {
       body:formData
     })
     if(response.ok){
-      await fetchPosts()
+      await uploadAvatar(id)
+      
       console.log(response)
       console.log("cover uploaded")
 
@@ -101,6 +102,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
     if(response.ok){
       console.log(response)
       console.log("avatar uploaded")
+      await fetchPosts()
     }else{
       
     }
@@ -109,11 +111,6 @@ const NewBlogPost = ({fetchPosts, posts}) => {
    }
   }
 
-
-  
-  
-  
-    
     return (
       <Container className="new-blog-container">
         <Form className="mt-5">
