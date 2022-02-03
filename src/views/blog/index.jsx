@@ -11,7 +11,10 @@ class Blog extends Component {
     loading: true,
   };
   componentDidMount() {
-    const id  = this.props.match.params;
+    // const id  = this.props.match.params;
+    const search = this.props.location.search;
+    const id = new URLSearchParams(search).get("blogId");
+
     console.log(posts);
     const blog = posts.find((post) => post.blogId.toString() === id);
     if (blog) {
