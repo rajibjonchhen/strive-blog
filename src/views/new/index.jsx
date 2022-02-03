@@ -19,7 +19,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
         name: "",
         avatar: ""
     },
-    content: "html",
+    content: "",
         } 
 )
       
@@ -28,7 +28,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
   const handleChangeCover = (e) => {
     setCoverImg(e.target.files[0])
   }
-  {/* for changing avatar */}
+  /* for changing avatar */
   const handleChangeAvatar = (e) => {
     setAvatarImg(e.target.files[0])
   }
@@ -86,7 +86,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
     console.log(error)
    }
   }
-{/* for changing avatar */}
+/* for changing avatar */
   const uploadAvatar = async(id) => {
     console.log("ID: ", id)
     console.log("avatar  data: ", avatarImg)
@@ -102,6 +102,22 @@ const NewBlogPost = ({fetchPosts, posts}) => {
     if(response.ok){
       console.log(response)
       console.log("avatar uploaded")
+      setPost({
+        category: "",
+        title: "",
+        cover: "",
+        readTime: {
+            value: null,
+            unit: ""
+        },
+        author: {
+            name: "",
+            avatar: ""
+        },
+        content: "",
+            } )
+      setCoverImg(null)
+      setAvatarImg(null)
       await fetchPosts()
     }else{
       
