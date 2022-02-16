@@ -19,7 +19,7 @@ export default class BlogList extends Component {
     })
     if(response.ok){
       let data = await response.json()
-      this.setState({posts:data})
+      this.setState({posts:data.blogs})
       console.log(data)
     }else{
       

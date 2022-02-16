@@ -16,7 +16,6 @@ export default class BlogAuthor extends Component {
         </Col>
         <Col>
         <a href={`${process.env.REACT_APP_BE_URL}/blogs/${blogId}/pdf`}>
-        <button  type="button" className="bg-warning text-white">Download</button>
         </a>
         </Col>
       </Row>

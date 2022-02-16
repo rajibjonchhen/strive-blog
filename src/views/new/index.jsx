@@ -37,7 +37,7 @@ const NewBlogPost = ({fetchPosts, posts}) => {
   const writePost = async(e) => {
     e.preventDefault()
     console.log(post)
-    let url = process.env.REACT_APP_BE_URL
+    let url =  "http://localhost:3001"//process.env.REACT_APP_BE_URL
     try {
       let response = await fetch(`${url}/blogs`, {
         method:"POST",
@@ -68,9 +68,9 @@ const NewBlogPost = ({fetchPosts, posts}) => {
     const formData = new FormData()
     formData.append('image',coverImg)
     console.log(formData)
-    let url = process.env.REACT_APP_BE_URL
+    let url = "http://localhost:3001" //process.env.REACT_APP_BE_URL
    try {
-    let response = await fetch(`${url}/blogs/${id}/cloudinaryUploadCover`, {
+    let response = await fetch(`${url}/blogs/${id}/cover`, {
       method:'PUT',
       body:formData
     })
@@ -93,9 +93,9 @@ const NewBlogPost = ({fetchPosts, posts}) => {
     console.log("avatar  data: ", avatarImg)
     const formData = new FormData()
     formData.append('image',avatarImg)
-    let url = process.env.REACT_APP_BE_URL
+    let url = "http://localhost:3001" //process.env.REACT_APP_BE_URL
    try {
-    let response = await fetch(`${url}/blogs/${id}/cloudinaryUploadAvatar`, {
+    let response = await fetch(`${url}/blogs/${id}/avatar`, {
       method:'PUT',
       body:formData
 
@@ -143,7 +143,6 @@ const NewBlogPost = ({fetchPosts, posts}) => {
               <option>Romantic</option>
               <option>History</option>
               <option>Scifi</option>
-              <option>Category5</option>
             </Form.Control>
           </Form.Group>
           <Form.Group controlId="blog-author" className="m-3">

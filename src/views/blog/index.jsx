@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Image } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 // import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
 import BlogLike from "../../components/likes/BlogLike";
@@ -9,7 +9,7 @@ import "./styles.css";
 
 const Blog = (props) => {
 const [blog, setBlog]  = useState({}) 
-const [blogId, setBlogId]  = useState(null) 
+const [reviews, setReviews]  = useState({}) 
 const [loading,setLoading] = useState(true)
 const params = useParams()
 
@@ -43,10 +43,35 @@ const params = useParams()
     
   }
 
+
+  const fetchReviews = async(id) => {
+    let url =  "http://localhost:3001"//process.env.REACT_APP_BE_URL
+   
+
+      try {
+        let response = await fetch(`${url}/blogs/${id}/reviews`, {
+          method:'GET',
+        })
+        if(response.ok){
+          let data = await response.json()
+          setReviews(data)
+          console.log(data)
+          setLoading(false)
+        }else{
+          setLoading(false)
+        }
+      } catch (error) {
+        console.log(error)
+        setLoading(false)
+      }
+    
+  }
+
       return (
         <div className="blog-details-root">
-          {blog && (<Container>
-            <img className="blog-details-cover w-100" src={blog.cover} fluid />
+          <Container>
+          {blog && (<div>
+            <img className="blog-details-cover w-100" src={blog.cover} fluid  alt="blog pic"/>
             <h1 className="blog-details-title">{blog.title}</h1>
 
             <div className="blog-details-container">
@@ -63,7 +88,10 @@ const params = useParams()
             </div>
 
             <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
-          </Container>)}
+            {/* <button className="btn btn-primary mt-4" onClick={(e) => set} >Show Reviews</button> */}
+
+            </div>)}
+            </Container>
         </div>
       )
       
