@@ -14,19 +14,18 @@ const [loading,setLoading] = useState(true)
 const params = useParams()
 
   useEffect(async()=>{
-    const id = await params.blogId
-    setBlogId(id)
-    console.log(id)
-      await fetchBlog()
+    const id =  params.id
+
+      await fetchBlog(id)
     
   },[])
 
-  const fetchBlog = async() => {
-    let url = process.env.REACT_APP_BE_URL
+  const fetchBlog = async(id) => {
+    let url =  "http://localhost:3001"//process.env.REACT_APP_BE_URL
    
 
       try {
-        let response = await fetch(`${url}/blogs/6lhl19qzkyvq2vs2`, {
+        let response = await fetch(`${url}/blogs/${id}`, {
           method:'GET',
         })
         if(response.ok){
