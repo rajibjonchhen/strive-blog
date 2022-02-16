@@ -28,10 +28,12 @@ const NewBlogPost = ({fetchPosts, posts}) => {
 
   const handleChangeCover = (e) => {
     setCoverImg(e.target.files[0])
+    console.log("handleChangeCover ")
   }
   /* for changing avatar */
   const handleChangeAvatar = (e) => {
     setAvatarImg(e.target.files[0])
+    console.log("handleChangeAvatar")
   }
   
   const writePost = async(e) => {
@@ -50,8 +52,8 @@ const NewBlogPost = ({fetchPosts, posts}) => {
       if(response.ok){
         let data  = await response.json();
        if(data){
-         console.log(data)
-        await uploadCover(data.blogId)
+         await uploadCover(data._id)
+         console.log(data._id)
       
        }
       }else {
@@ -76,7 +78,6 @@ const NewBlogPost = ({fetchPosts, posts}) => {
     })
     if(response.ok){
       await uploadAvatar(id)
-      
       console.log(response)
       console.log("cover uploaded")
 

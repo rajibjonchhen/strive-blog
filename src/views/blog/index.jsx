@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 // import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
 import BlogLike from "../../components/likes/BlogLike";
 // import posts from "../../data/posts.json";
 import "./styles.css";
+import EditBlog from "./EditBlog";
+import AddReviews from "./AddReviews";
 
 const Blog = (props) => {
 const [blog, setBlog]  = useState({}) 
-const [reviews, setReviews]  = useState({}) 
+const [reviews, setReviews]  = useState([]) 
 const [loading,setLoading] = useState(true)
+const [showReviews, setShowReviews] = useState()
+const [showEditPage, setShowEditPage] = useState()
 const params = useParams()
 
   useEffect(async()=>{
@@ -45,9 +49,8 @@ const params = useParams()
 
 
   const fetchReviews = async(id) => {
+    
     let url =  "http://localhost:3001"//process.env.REACT_APP_BE_URL
-   
-
       try {
         let response = await fetch(`${url}/blogs/${id}/reviews`, {
           method:'GET',
@@ -57,6 +60,7 @@ const params = useParams()
           setReviews(data)
           console.log(data)
           setLoading(false)
+
         }else{
           setLoading(false)
         }
@@ -66,6 +70,30 @@ const params = useParams()
       }
     
   }
+
+  const handleDelete = async(id) => {
+    
+    let url =  "http://localhost:3001"//process.env.REACT_APP_BE_URL
+      try {
+        let response = await fetch(`${url}/blogs/${id}`, {
+          method:'DELETE',
+        })
+        if(response.ok){
+          let data = await response.json()
+          console.log(data)
+          setLoading(false)
+
+        }else{
+          setLoading(false)
+        }
+      } catch (error) {
+        console.log(error)
+        setLoading(false)
+      }
+    
+  }
+
+
 
       return (
         <div className="blog-details-root">
@@ -88,10 +116,23 @@ const params = useParams()
             </div>
 
             <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
-            {/* <button className="btn btn-primary mt-4" onClick={(e) => set} >Show Reviews</button> */}
-
+            <button className="btn btn-primary mt-4" onClick={(e) => {fetchReviews(blog._id); setShowReviews(!showReviews)}} >Show Reviews</button>
+            <button className="btn btn-secondary mt-4 mx-3 " onClick={(e) => {setShowEditPage(true)}} >Edit Post</button>
+            <button className="btn btn-danger mt-4 " onClick={(e) => {handleDelete(blog._id); setShowReviews(!showReviews)}} >Delete Post</button>
+            <div style={{display:showEditPage? "block":"none"}}>
+              <EditBlog blog={blog}/>
+            </div>
             </div>)}
-            </Container>
+
+            <Row className="d-flex justify-content-between mt-3" style={{display:showReviews? "block":"none", height:"300px",overflow:"hidden"}}>
+            <Col xs={12} sm={8} md={8} lg={8} style={{height:"300px",overflow:"scroll"}}>
+                {reviews && reviews.map(review =>  <p className="w-100 p-3  bg-dark text-white"><span className="h3">{review.rate}</span> {review.comment}</p>)}
+            </Col>
+            <Col>
+              <AddReviews/>
+            </Col>
+            </Row>
+          </Container>
         </div>
       )
       

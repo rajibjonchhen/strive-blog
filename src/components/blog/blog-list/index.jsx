@@ -12,7 +12,7 @@ export default class BlogList extends Component {
   }
   
   fetchData = async() => {
-    let url = process.env.REACT_APP_BE_URL
+    let url =  "http://localhost:3001"//process.env.REACT_APP_BE_URL
    try {
     let response = await fetch(`${url}/blogs`, {
       method:'GET',
