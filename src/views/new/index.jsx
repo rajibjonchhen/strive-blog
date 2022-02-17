@@ -5,9 +5,11 @@ import { Container, Form, Button } from "react-bootstrap";
 import "./styles.css";
 
 const NewBlogPost = ({fetchPosts, posts}) => {
-  const [coverImg, setCoverImg] = useState()
-  const [avatarImg, setAvatarImg] = useState()
-  const [post, setPost] = useState( {
+
+const [authors, setAuthors] = useState()  
+const [coverImg, setCoverImg] = useState()
+const [avatarImg, setAvatarImg] = useState()
+const [post, setPost] = useState( {
     category: "",
     title: "",
     cover: "",
@@ -24,7 +26,13 @@ const NewBlogPost = ({fetchPosts, posts}) => {
         } 
 )
       
-  useEffect(()=>{},[])
+  useEffect(()=>{
+    fetchAuthors()
+  },[])
+
+  const fetchAuthors = () => {
+
+  }
 
   const handleChangeCover = (e) => {
     setCoverImg(e.target.files[0])

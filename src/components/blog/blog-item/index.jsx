@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 export default class BlogItem extends Component {
   render() {
-    const { title, cover, author, _id } = this.props;
+    const { title, cover, authors, _id } = this.props;
     return (
       <Card className="blog-card">
           <Link to={`/blog/${_id}`} className="blog-link">
@@ -14,8 +14,11 @@ export default class BlogItem extends Component {
           <Card.Body>
             <Card.Title>{title}</Card.Title>
           </Card.Body>
-          <Card.Footer>
-            <BlogAuthor {...author} _id={_id} />
+          <Card.Footer>{
+            authors && authors.map(author => 
+              <BlogAuthor {...author} _id={_id} />
+              )
+            }
           </Card.Footer>
         </Card>
     );

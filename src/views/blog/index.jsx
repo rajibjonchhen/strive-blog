@@ -125,8 +125,11 @@ const params = useParams()
             </div>)}
 
             <Row className="d-flex justify-content-between mt-3" style={{display:showReviews? "block":"none", height:"300px",overflow:"hidden"}}>
-            <Col xs={12} sm={8} md={8} lg={8} style={{height:"300px",overflow:"scroll"}}>
-                {reviews && reviews.map(review =>  <p className="w-100 p-3  bg-dark text-white"><span className="h3">{review.rate}</span> {review.comment}</p>)}
+            <Col xs={12} sm={8} md={8} lg={8} style={{ height:"300px",overflow:"scroll"}} className="d-flex flex-column p-5 bg-secondary h-100">
+                {reviews && reviews.map(review =><div>
+                      <h3>There are {reviews.length} reviews</h3>
+                    <p className="w-100 p-3  bg-dark text-white"><span className="h3">{review.rate}</span> {review.comment}</p>
+                </div>)}
             </Col>
             <Col>
               <AddReviews/>
