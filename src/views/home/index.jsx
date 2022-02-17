@@ -4,11 +4,10 @@ import { useParams } from "react-router-dom";
 import BlogList from "../../components/blog/blog-list";
 import "./styles.css";
 
-const Home = () => {
+const Home = ({author, setAuthor}) => {
   
 const params = useParams
-  const [author, setAuthor] = useState()
-
+  
   useEffect(() =>{
     let id = params.id
     console.log(id )
