@@ -12,6 +12,7 @@ import AddReviews from "./AddReviews";
 const Blog = (props) => {
 const [blog, setBlog]  = useState({}) 
 const [reviews, setReviews]  = useState([]) 
+const [likes, setLikes]  = useState([]) 
 const [loading,setLoading] = useState(true)
 const [showReviews, setShowReviews] = useState()
 const [showEditPage, setShowEditPage] = useState()
@@ -35,6 +36,8 @@ const params = useParams()
         if(response.ok){
           let data = await response.json()
           setBlog(data)
+          setReviews(data.reviews)
+          setLikes(data.likes)
           console.log(data)
           setLoading(false)
         }else{
@@ -48,28 +51,6 @@ const params = useParams()
   }
 
 
-  const fetchReviews = async(id) => {
-    
-    let url =  "http://localhost:3001"//process.env.REACT_APP_BE_URL
-      try {
-        let response = await fetch(`${url}/blogs/${id}/reviews`, {
-          method:'GET',
-        })
-        if(response.ok){
-          let data = await response.json()
-          setReviews(data)
-          console.log(data)
-          setLoading(false)
-
-        }else{
-          setLoading(false)
-        }
-      } catch (error) {
-        console.log(error)
-        setLoading(false)
-      }
-    
-  }
 
   const handleDelete = async(id) => {
     
@@ -110,13 +91,12 @@ const params = useParams()
                 {/* <div>{blog.createdAt}</div>
                 <div>{blog.readTime.value} {blog.readTime.unit} read</div> */}
                 <div style={{marginTop:20}}>
-                  <BlogLike defaultLikes={["123"]} onChange={console.log}/>
+                  <BlogLike likes={likes} defaultLikes={["1"]} onChange={console.log}/>
                 </div>
               </div>
             </div>
 
             <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
-            <button className="btn btn-primary mt-4" onClick={(e) => {fetchReviews(blog._id); setShowReviews(!showReviews)}} >Show Reviews</button>
             <button className="btn btn-secondary mt-4 mx-3 " onClick={(e) => {setShowEditPage(true)}} >Edit Post</button>
             <button className="btn btn-danger mt-4 " onClick={(e) => {handleDelete(blog._id); setShowReviews(!showReviews)}} >Delete Post</button>
             <div style={{display:showEditPage? "block":"none"}}>
@@ -124,14 +104,14 @@ const params = useParams()
             </div>
             </div>)}
 
-            <Row className="d-flex justify-content-between mt-3" style={{display:showReviews? "block":"none", height:"300px",overflow:"hidden"}}>
-            <Col xs={12} sm={8} md={8} lg={8} style={{ height:"300px",overflow:"scroll"}} className="d-flex flex-column p-5 bg-secondary h-100">
-                {reviews && reviews.map(review =><div>
+            <Row className="d-flex justify-content-between mt-3" style={{display:showReviews? "block":"none", minHeight:"350px"}}>
+            <Col xs={12} sm={12} md={6} lg={8} style={{ minHeight:"350px",overflow:"scroll"}} className="d-flex flex-column p-5 bg-secondary h-100">
                       <h3>There are {reviews.length} reviews</h3>
-                    <p className="w-100 p-3  bg-dark text-white"><span className="h3">{review.rate}</span> {review.comment}</p>
+                {blog && reviews.map(review =><div>
+                    <p className=" p-3  bg-dark text-white"><span className="h4 p-2 bg-secondary">{review.rate} stars</span> Review - {review.comment}</p>
                 </div>)}
             </Col>
-            <Col>
+            <Col xs={12} sm={12} md={6} lg={4}>
               <AddReviews/>
             </Col>
             </Row>

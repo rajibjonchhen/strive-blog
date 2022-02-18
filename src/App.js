@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
 import Home from "./views/home";
@@ -9,7 +9,7 @@ import Error404 from "./Error404";
 import Login from "./components/Login/Login";
 function App() {
   
-  
+  const [author, setAuthor] = useState()
   
   return (
     <BrowserRouter>

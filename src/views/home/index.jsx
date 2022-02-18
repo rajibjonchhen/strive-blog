@@ -6,7 +6,7 @@ import "./styles.css";
 
 const Home = ({author, setAuthor}) => {
   
-const params = useParams
+const params = useParams()
   
   useEffect(() =>{
     let id = params.id
@@ -18,6 +18,7 @@ const params = useParams
       const url = "http://localhost:3001"
       
       const response = await fetch(`${url}/authors/${id}`)
+      console.log(url)
       if(response.ok) {
         const data = await response.json()
         console.log(data)
@@ -31,7 +32,7 @@ const params = useParams
     return (
       <Container fluid="sm">
         <h1 className="blog-main-title">Welcome to the Strive Blog!</h1>
-        {author && <BlogList author={author}/>}
+        <BlogList author={author}/>
       </Container>
     );
   
