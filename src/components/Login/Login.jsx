@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useLocation,useHistory } from "react-router-dom";
+import { useLocation,useHistory, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
     const [author, setAuthor] = useState({
         name:'',
         email:''
@@ -30,7 +30,7 @@ if(response.ok){
         })
         // window.location.href = `http://localhost:3000/home/${data._id}`;
 
-        history.push(`/home/${data._id}`)
+        navigate(`/home/${data._id}`)
 
 
 
@@ -43,12 +43,12 @@ if(response.ok){
                 <Col sm={12} md={8} lg={4} className="m-auto">
                 <div className="d-flex flex-column mt-5 " style={{height:'500px', paddingTop:'200px'}}>
                     <p className='h3'>Enter detail to login</p>
-                    <label for="name"> Full Name</label>
+                    <label htmlFor="name"> Full Name</label>
                     <input type="text" id="name" name="name" value={author.name} onChange={(e) => setAuthor({...author,name:e.target.value})}/>
-                    <label for="email">Email</label>
+                    <label htmlFor="email">Email</label>
                     <input type="text" id="email" name="email" value={author.email} onChange={(e) => setAuthor({...author,email:e.target.value})}/>
                     <div className='mt-4 m-auto'>
-                    <span className='btn btn-outline-primary' onClick={(e) => createAuthor()}>Confirm</span>
+                    <span className='btn btn-outline-primary' onClick={(e) => createAuthor(e)}>Confirm</span>
                     
                     </div>
                     {/* <label for="avatar">Avatar</label>

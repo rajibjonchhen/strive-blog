@@ -15,8 +15,8 @@ export default class BlogItem extends Component {
             <Card.Title>{title}</Card.Title>
           </Card.Body>
           <Card.Footer>{
-            authors && authors.map(author => 
-              <BlogAuthor {...author} _id={_id} />
+            authors && authors.map((author,i) => 
+              <BlogAuthor key={i} {...author} _id={_id} />
               )
             }
           </Card.Footer>

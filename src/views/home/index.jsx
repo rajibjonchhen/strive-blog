@@ -7,7 +7,6 @@ import "./styles.css";
 const Home = ({author, setAuthor}) => {
   
 const params = useParams()
-  
   useEffect(() =>{
     let id = params.id
     console.log(id )

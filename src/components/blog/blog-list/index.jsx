@@ -31,9 +31,9 @@ export default class BlogList extends Component {
   render() {
     return (
       <Row>
-        {this.state.posts && this.state.posts.reverse().map((post) => (
-          <Col md={4} style={{ marginBottom: 50 }}>
-            <BlogItem key={post.title} {...post} />
+        {this.state.posts && this.state.posts.reverse().map((post,i) => (
+          <Col md={4} key={i} style={{ marginBottom: 50 }}>
+            <BlogItem  {...post} />
           </Col>
         ))}
       </Row>
