@@ -10,14 +10,14 @@ import Login from "./components/Login/Login";
 
 function App() {
   
-  const [author, setAuthor] = useState()
+  
   
   return (
     <BrowserRouter>
       <NavBar />
     <Routes>
       <Route path="/" exact element={<Login/>} />
-      <Route path="/home/:id" exact element={<Home author={author} setAuthor={setAuthor}/>} />
+      <Route path="/home" exact element={<Home/>} />
       <Route path="/blog/:id" exact element={<Blog/>} />
       <Route path="/new" exact element={<NewBlogPost/>} />
       <Route path="*"  component={Error404} />

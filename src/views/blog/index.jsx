@@ -8,6 +8,7 @@ import BlogLike from "../../components/likes/BlogLike";
 import "./styles.css";
 import EditBlog from "./EditBlog";
 import AddReviews from "./AddReviews";
+import Loader from "../../Loader";
 
 const Blog = (props) => {
 const [blog, setBlog]  = useState({}) 
@@ -27,11 +28,12 @@ const params = useParams()
 
   const fetchBlog = async(id) => {
     let url =  "http://localhost:3001"//process.env.REACT_APP_BE_URL
-   
-
       try {
         let response = await fetch(`${url}/blogs/${id}`, {
           method:'GET',
+          headers: {
+            authorization :  localStorage.getItem("token")
+          }
         })
         if(response.ok){
           let data = await response.json()
@@ -58,6 +60,9 @@ const params = useParams()
       try {
         let response = await fetch(`${url}/blogs/${id}`, {
           method:'DELETE',
+          headers: {
+            authorization :  localStorage.getItem("token")
+          }
         })
         if(response.ok){
           let data = await response.json()
@@ -79,7 +84,7 @@ const params = useParams()
       return (
         <div className="blog-details-root">
           <Container>
-          {blog && (<div>
+          { blog && (<div>
             <img className="blog-details-cover w-100" src={blog.cover} fluid  alt="blog pic"/>
             <h1 className="blog-details-title">{blog.title}</h1>
 

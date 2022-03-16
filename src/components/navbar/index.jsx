@@ -4,6 +4,26 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./styles.css";
 export default class NavBar extends Component {
+state = {
+  author : {}
+}
+
+  componentDidMount = () =>{
+    this.fetchAuthor()
+  }
+
+  fetchAuthor = async() => {
+      const url = "http://localhost:3001"
+      const response = await fetch(`${url}/authors/me`,{header : { authorization :  localStorage.getItem("token")}})
+      if(response.ok) {
+        const data = await response.json()
+        console.log(data)
+        if(data){
+          this.setState({author:data})
+        }
+      }
+      
+  } 
   render() {
     return (
       <Navbar expand="lg" className="blog-navbar" fixed="top">

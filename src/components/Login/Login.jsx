@@ -28,16 +28,16 @@ const response = await fetch(`${url}/authors/register`,{
 })
 
 if(response.ok){
-    const data = await response.json()
-    if(data){
-        console.log(data)
+    const {token, _id} = await response.json()
+    if(token){
+        localStorage.setItem("token",token);
         setAuthor({
             name:'',
             email:''
         })
         // window.location.href = `http://localhost:3000/home/${data._id}`;
 
-        navigate(`/home/${data._id}`)
+        navigate(`/home`)
     }
 }
 }
@@ -65,7 +65,7 @@ const loginFunc = async(e) => {
             
                 // window.location.href = `http://localhost:3000/home/${data._id}`;
         
-                navigate(`/home/${_id}`)
+                navigate(`/home`)
             }
         }
 }

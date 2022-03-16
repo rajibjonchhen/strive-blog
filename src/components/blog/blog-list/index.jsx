@@ -16,15 +16,19 @@ export default class BlogList extends Component {
    try {
     let response = await fetch(`${url}/blogs`, {
       method:'GET',
+      headers: {
+        authorization :  localStorage.getItem("token")
+      }
     })
     if(response.ok){
       let data = await response.json()
       this.setState({posts:data.blogs})
       console.log(data)
     }else{
-      
+      console.log("error on fetching data")
     }
-   } catch (error) {
+   } 
+   catch (error) {
     console.log(error)
    }
   }
