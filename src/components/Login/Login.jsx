@@ -52,14 +52,13 @@ const loginFunc = async(e) => {
                 "Content-Type" : "application/json",
             }
         })
-        
         if(response.ok){
             const {token, _id} = await response.json()
             if(token){
                 console.log(token)
                 localStorage.setItem("token",token);
                 setUserLogin({
-                    name:'',
+                    password:'',
                     email:''
                 })
             

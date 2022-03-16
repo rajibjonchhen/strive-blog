@@ -52,7 +52,8 @@ const [post, setPost] = useState( {
       let response = await fetch(`${url}/blogs`, {
         method:"POST",
         body: JSON.stringify(post),
-        headers:{
+        headers: {
+          "authorization" :  localStorage.getItem("token"),
         "Content-Type":"application/json"
       }
 
@@ -82,7 +83,10 @@ const [post, setPost] = useState( {
    try {
     let response = await fetch(`${url}/blogs/${id}/cover`, {
       method:'PUT',
-      body:formData
+      body:formData ,
+      headers: {
+        authorization :  localStorage.getItem("token")
+      }
     })
     if(response.ok){
       await uploadAvatar(id)
@@ -106,7 +110,10 @@ const [post, setPost] = useState( {
    try {
     let response = await fetch(`${url}/blogs/${id}/avatar`, {
       method:'PUT',
-      body:formData
+      body:formData,
+      headers: {
+        "authorization" :  localStorage.getItem("token")
+      }
 
     })
     if(response.ok){
