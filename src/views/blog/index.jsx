@@ -6,6 +6,7 @@ import BlogLike from "../../components/likes/BlogLike";
 import "./styles.css";
 import EditBlog from "./EditBlog";
 import AddReviews from "./AddReviews";
+import Loader from "../../Loader";
 
 
 const Blog = (props) => {
@@ -82,7 +83,7 @@ const params = useParams()
       return (
         <div className="blog-details-root">
           <Container>
-          { blog && (<div>
+          {loading? <Loader/> : blog && (<div>
             <img className="blog-details-cover w-100" src={blog.cover} fluid  alt="blog pic"/>
             <h1 className="blog-details-title">{blog.title}</h1>
 

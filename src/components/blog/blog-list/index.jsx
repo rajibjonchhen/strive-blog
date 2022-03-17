@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Row, Col } from "react-bootstrap";
+import Loader from "../../../Loader";
 import BlogItem from "../blog-item";
 // import posts from "../../../data/posts.json";
 export default class BlogList extends Component {
   state = {
-    posts:[]
+    posts:[],
+    isLoading : true
   }
+
   
   componentDidMount = async() => {
     await this.fetchData()
@@ -24,19 +27,22 @@ export default class BlogList extends Component {
     if(response.ok){
       let data = await response.json()
       this.setState({posts:data.blogs})
+      this.setState({isLoading:false})
       console.log(data)
     }else{
       console.log("error on fetching data")
+      this.setState({isLoading:false})
     }
-   } 
-   catch (error) {
+  } 
+  catch (error) {
     console.log(error)
+    this.setState({isLoading:false})
    }
   }
   render() {
     return (
       <Row>
-        {this.state.posts && this.state.posts.reverse().map((post,i) => (
+        {this.state.isLoading? <Loader/> : this.state.posts && this.state.posts.reverse().map((post,i) => (
           <Col md={4} key={i} style={{ marginBottom: 50 }}>
             <BlogItem  {...post} />
           </Col>

@@ -10,7 +10,8 @@ const Login = () => {
         name:'',
         surname:'',
         email:'',
-        password:''
+        password:'',
+        rePassword:''
     })
 
     const [userLogin, setUserLogin] = useState({
@@ -82,16 +83,22 @@ const loginFunc = async(e) => {
                     <div style={{display:!login? "block":"none"}}>
                         <div className="d-flex flex-column mt-5 " >
                             <p className='h3'>Enter detail to Register</p>
+                            
                             <label  htmlFor="name">  Name *</label>
                             <input required type="text" id="name" name="name" value={author.name} onChange={(e) => setAuthor({...author,name:e.target.value})}/>
+                            
                             <label  htmlFor="surname"> Last Name *</label>
-                            <input required type="text" id="surname" name="surnamename" value={author.surname} onChange={(e) => setAuthor({...author,surname:e.target.value})}/>
+                            <input required type="text" id="surname" name="surname" value={author.surname} onChange={(e) => setAuthor({...author,surname:e.target.value})}/>
+                            
                             <label  htmlFor="email">Email *</label>
                             <input required type="text" id="email" name="email" value={author.email} onChange={(e) => setAuthor({...author,email:e.target.value})}/>
+                            
                             <label htmlFor="pw">Password *</label>
-                            <input required type="password" id="pw" name="email" value={author.password} onChange={(e) => setAuthor({...author,password:e.target.value})}/>
+                            <input required type="password" id="pw" name="pw" value={author.password} onChange={(e) => setAuthor({...author,password:e.target.value})}/>
+                            
                             <label htmlFor="rePw">Re Password *</label>
-                            <input required type="password" id="rePw" name="email" value={author.password} onChange={(e) => setAuthor({...author,password:e.target.value})}/>
+                            <input required type="password" id="rePw" name="rePw" value={author.rePassword} onChange={(e) => setAuthor({...author,rePassword:e.target.value})}/>
+                            
                             <div className='mt-4 m-auto'>
                             <span className='btn btn-outline-primary' onClick={(e) => createAuthor(e)}>Confirm</span>
                                 <OathLogin/>
@@ -102,10 +109,13 @@ const loginFunc = async(e) => {
                     <div style={{display:login? "block":"none"}}>
                         <div className="d-flex flex-column mt-5 " >
                             <p className='h3'>Enter detail to Login</p>
-                            <label htmlFor="userName">Email</label>
-                            <input type="text" id="userName" name="email" value={userLogin.email} onChange={(e) => setUserLogin({...userLogin,email:e.target.value})}/>
-                            <label htmlFor="password"> Password</label>
-                            <input type="password" id="userName" name="password" value={userLogin.password} onChange={(e) => setUserLogin({...userLogin,password:e.target.value})}/>
+
+                            <label htmlFor="user">Email</label>
+                            <input type="text" id="user" name="user" value={userLogin.email} onChange={(e) => setUserLogin({...userLogin,email:e.target.value})}/>
+                            
+                            <label htmlFor="loginPw"> Password</label>
+                            <input type="password" id="loginPw" name="loginPw" value={userLogin.password} onChange={(e) => setUserLogin({...userLogin,password:e.target.value})}/>
+                            
                             <div className='mt-4 m-auto'>
                             <span className='btn btn-outline-primary' onClick={(e) => loginFunc(e)}>Confirm</span>
                                 <OathLogin/>

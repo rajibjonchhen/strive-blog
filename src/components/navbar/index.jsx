@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import logo from "../../assets/logo.png";
 import "./styles.css";
@@ -8,9 +8,9 @@ import "./styles.css";
 const myNavigator = ( {defaultValue,key})  => {
   const [parameter,setParameter]=useState(defaultValue)
   useEffect(()=>{
-      const params = new URLSearchParams(window.location.search)
-        console.log(params)
-          setParameter(params)
+      const location = useLocation()
+        console.log(location.pathname)
+          setParameter(location.pathname)
   },[window.location.search])
 
   return parameter
@@ -31,7 +31,6 @@ state = {
       const response = await fetch(`${url}/authors/me`,{headers : { authorization :  localStorage.getItem("token")}})
       if(response.ok) {
         const data = await response.json()
-        console.log(data)
         if(data){
           this.setState({author:data})
         }
@@ -49,7 +48,7 @@ state = {
           
           <div style={{display:myNavigator === "http://localhost:3000/"? "none":"block"}}>
             <div className='d-flex align-items-center' >
-              <img style={{width:'40px'}} src={ "https://www.pavilionweb.com/wp-content/uploads/2017/03/man.png"} alt='user profile' />
+              <img style={{width:'30px'}} src={ "https://www.pavilionweb.com/wp-content/uploads/2017/03/man.png"} alt='user profile' />
                 <span className='m-2'>{this.state.author && this.state.author.name}</span>
                 <Button
                   as={Link}

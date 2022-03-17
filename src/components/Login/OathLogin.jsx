@@ -7,13 +7,13 @@ function OathLogin() {
     return ( 
         <div className='text-center mt-2'>
             <a href="http://localhost:3001/authors/googleLogin">
-            <img className='oath-img pointer' src={google} alt/>
+            <img className='oath-img pointer' src={google} alt="google logo"/>
             </a>
             <a href="/">
-            <img className='oath-img pointer' src={insta} alt/>
+            <img className='oath-img pointer' src={insta} alt="insta logo"/>
             </a>
             <a href="/">
-            <img className='oath-img pointer' src={facebook} alt/>
+            <img className='oath-img pointer' src={facebook} alt="facebook logo"/>
             </a>
         </div>
      );
