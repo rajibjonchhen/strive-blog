@@ -12,7 +12,9 @@ state = {
 
   componentDidMount = () =>{
    
+    if(window.location.href !== "http://localhost:3000/"){  
     setTimeout(() => {this.fetchAuthor()},100 )
+    }
   }
 
   fetchAuthor = async() => {

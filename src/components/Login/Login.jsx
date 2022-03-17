@@ -74,14 +74,14 @@ const loginFunc = async(e) => {
         }
 }
 
-    return(<Container>
-            <Row>
+    return(<Container >
+            <Row className="d-flex align-items-center" style={{height:'100vh'}}>
                 <Col sm={12} md={8} lg={4} className="m-auto">
-                <div className="mt-5 " style={{height:'600px', paddingTop:'200px'}}>
+                <div className="mt-5">
                     <button onClick={() => setLogin(false)}>Register</button>
                     <button onClick={() => setLogin(true)}>Login</button>
                     <div style={{display:!login? "block":"none"}}>
-                        <div className="d-flex flex-column mt-5 " >
+                        <div className="d-flex flex-column mt-5 text-left" >
                             <p className='h3'>Enter detail to Register</p>
                             
                             <label  htmlFor="name">  Name *</label>
@@ -99,8 +99,8 @@ const loginFunc = async(e) => {
                             <label htmlFor="rePw">Re Password *</label>
                             <input required type="password" id="rePw" name="rePw" value={author.rePassword} onChange={(e) => setAuthor({...author,rePassword:e.target.value})}/>
                             
-                            <div className='mt-4 m-auto'>
-                            <span className='btn btn-outline-primary' onClick={(e) => createAuthor(e)}>Confirm</span>
+                            <div className='mt-4 text-center'>
+                            <button className=' btn btn-outline-primary' onClick={(e) => createAuthor(e)}>Confirm</button>
                                 <OathLogin/>
                             </div>
                         </div>

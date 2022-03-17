@@ -33,8 +33,7 @@ useEffect(() => {
     return (
       <Container fluid="sm">
         <h1 className="blog-main-title">Welcome to the Strive Blog!</h1>
-       
-       {authorized&& <BlogList />}
+        {authorized&& <BlogList />}
       </Container>
     );
   
