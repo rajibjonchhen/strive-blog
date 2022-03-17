@@ -8,6 +8,7 @@ const Login = () => {
   const navigate = useNavigate()
     const [author, setAuthor] = useState({
         name:'',
+        surname:'',
         email:'',
         password:''
     })
@@ -81,8 +82,10 @@ const loginFunc = async(e) => {
                     <div style={{display:!login? "block":"none"}}>
                         <div className="d-flex flex-column mt-5 " >
                             <p className='h3'>Enter detail to Register</p>
-                            <label  htmlFor="name"> Full Name *</label>
+                            <label  htmlFor="name">  Name *</label>
                             <input required type="text" id="name" name="name" value={author.name} onChange={(e) => setAuthor({...author,name:e.target.value})}/>
+                            <label  htmlFor="surname"> Last Name *</label>
+                            <input required type="text" id="surname" name="surnamename" value={author.surname} onChange={(e) => setAuthor({...author,surname:e.target.value})}/>
                             <label  htmlFor="email">Email *</label>
                             <input required type="text" id="email" name="email" value={author.email} onChange={(e) => setAuthor({...author,email:e.target.value})}/>
                             <label htmlFor="pw">Password *</label>

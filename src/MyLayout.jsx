@@ -1,5 +1,6 @@
 import React from "react";
-import { Navbar } from "react-bootstrap";
+
+import Navbar from "./components/navbar/index";
 import Footer from "./components/footer";
 
 const MyLayout = ({children}) => {

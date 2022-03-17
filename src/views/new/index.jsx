@@ -6,9 +6,8 @@ import "./styles.css";
 
 const NewBlogPost = ({fetchPosts, posts}) => {
 
-const [authors, setAuthors] = useState()  
+ 
 const [coverImg, setCoverImg] = useState()
-const [avatarImg, setAvatarImg] = useState()
 const [post, setPost] = useState( {
     category: "",
     title: "",
@@ -26,22 +25,13 @@ const [post, setPost] = useState( {
         } 
 )
       
-  useEffect(()=>{
-    fetchAuthors()
-  },[])
 
-  const fetchAuthors = () => {
 
-  }
+ 
 
   const handleChangeCover = (e) => {
     setCoverImg(e.target.files[0])
     console.log("handleChangeCover ")
-  }
-  /* for changing avatar */
-  const handleChangeAvatar = (e) => {
-    setAvatarImg(e.target.files[0])
-    console.log("handleChangeAvatar")
   }
   
   const writePost = async(e) => {
@@ -89,7 +79,6 @@ const [post, setPost] = useState( {
       }
     })
     if(response.ok){
-      await uploadAvatar(id)
       console.log(response)
       console.log("cover uploaded")
 
@@ -100,49 +89,7 @@ const [post, setPost] = useState( {
     console.log(error)
    }
   }
-/* for changing avatar */
-  const uploadAvatar = async(id) => {
-    console.log("ID: ", id)
-    console.log("avatar  data: ", avatarImg)
-    const formData = new FormData()
-    formData.append('image',avatarImg)
-    let url = "http://localhost:3001" //process.env.REACT_APP_BE_URL
-   try {
-    let response = await fetch(`${url}/blogs/${id}/avatar`, {
-      method:'PUT',
-      body:formData,
-      headers: {
-        "authorization" :  localStorage.getItem("token")
-      }
 
-    })
-    if(response.ok){
-      console.log(response)
-      console.log("avatar uploaded")
-      setPost({
-        category: "",
-        title: "",
-        cover: "",
-        readTime: {
-            value: null,
-            unit: ""
-        },
-        author: {
-            name: "",
-            avatar: ""
-        },
-        content: "",
-            } )
-      setCoverImg(null)
-      setAvatarImg(null)
-      await fetchPosts()
-    }else{
-      
-    }
-   } catch (error) {
-    console.log(error)
-   }
-  }
 
     return (
       <Container className="new-blog-container">
@@ -161,14 +108,6 @@ const [post, setPost] = useState( {
               <option>Scifi</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId="blog-author" className="m-3">
-            <Form.Label >Author</Form.Label>
-            <Form.Control value={post.author.name} onChange={(e) => setPost({...post ,author:{...post.author,name:e.target.value}})} size="lg" placeholder="Author name" />
-          </Form.Group>
-          <Form.Group controlId="blog-author" className="m-3">
-          <Form.Label >Email</Form.Label>
-            <Form.Control value={post.author.email} onChange={(e) => setPost({...post ,author:{...post.author,email:e.target.value}})} size="lg" placeholder="Email" />
-          </Form.Group>
           </div>
           <Form.Group className='d-flex flex-column m-3'>
           <Form.Label >Upload Cover Image</Form.Label>
@@ -183,18 +122,6 @@ const [post, setPost] = useState( {
             />
           </Form.Group>
 {/* for changing avatar */}
-          <Form.Group className='d-flex flex-column m-3'>
-          <Form.Label >Upload Avatar </Form.Label>
-            <input
-              style={{height:'50px'}}
-              type='file'
-              onChange={(e) => handleChangeAvatar(e)}
-              // isInvalid={!!errors.file}
-              // feedback={errors.file}
-              id="validationFormik107"
-              feedbackTooltip
-            />
-          </Form.Group>
           <Form.Group controlId="blog-content" className="m-3">
             <Form.Label>Blog Content</Form.Label>
             <ReactQuill value={post.content} onChange={(html) => setPost({...post,content:html})} className="new-blog-content" placeholder="write the blog here"/>

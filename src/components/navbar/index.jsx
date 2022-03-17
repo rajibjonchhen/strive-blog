@@ -1,13 +1,19 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+
 import logo from "../../assets/logo.png";
 import "./styles.css";
 
-const navigator = (props) => {
-  const navigate = useNavigate();
+const myNavigator = ( {defaultValue,key})  => {
+  const [parameter,setParameter]=useState(defaultValue)
+  useEffect(()=>{
+      const params = new URLSearchParams(window.location.search)
+        console.log(params)
+          setParameter(params)
+  },[window.location.search])
 
-  return <NavBar navigate={navigate}/> ;
+  return parameter
 }
 
 export default class NavBar extends Component {
@@ -16,7 +22,8 @@ state = {
 }
 
   componentDidMount = () =>{
-    this.fetchAuthor()
+    setTimeout(() => {this.fetchAuthor()},200 )
+    
   }
 
   fetchAuthor = async() => {
@@ -40,27 +47,30 @@ state = {
             <img className="blog-navbar-brand" alt="logo" src={logo} />
           </Navbar.Brand>
           
-          <div className='d-flex align-items-center'>
-            <span className='m-2'>{this.state.author && this.state.author.name}</span>
-          <Button
-            as={Link}
-            to="/new"
-            className="blog-navbar-add-button bg-dark m-2"
-            size="lg"
-            >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-plus-lg"
-              viewBox="0 0 16 16"
-              >
-              <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
-            </svg>
-            Post Article
-          </Button>
-          <Button  className="bg-dark m-2" size="lg" onClick = {() => {navigate("/")}}>Log out</Button>
+          <div style={{display:myNavigator === "http://localhost:3000/"? "none":"block"}}>
+            <div className='d-flex align-items-center' >
+              <img style={{width:'40px'}} src={ "https://www.pavilionweb.com/wp-content/uploads/2017/03/man.png"} alt='user profile' />
+                <span className='m-2'>{this.state.author && this.state.author.name}</span>
+                <Button
+                  as={Link}
+                  to="/new"
+                  className="blog-navbar-add-button bg-dark m-2"
+                  size="lg"
+                  >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-plus-lg"
+                    viewBox="0 0 16 16"
+                    >
+                    <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+                  </svg>
+                  Post Article
+                </Button>
+                <Button  className="bg-dark m-2" size="lg" onClick = {() => {navigate("/")}}>Log out</Button>
+                </div>
               </div>
         </Container>
       </Navbar>
