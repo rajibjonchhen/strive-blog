@@ -6,7 +6,8 @@ const Login = () => {
   const navigate = useNavigate()
     const [author, setAuthor] = useState({
         name:'',
-        email:''
+        email:'',
+        password:''
     })
 
     const [userLogin, setUserLogin] = useState({
@@ -72,16 +73,20 @@ const loginFunc = async(e) => {
     return(<Container>
             <Row>
                 <Col sm={12} md={8} lg={4} className="m-auto">
-                <div className="mt-5 " style={{height:'500px', paddingTop:'200px'}}>
+                <div className="mt-5 " style={{height:'600px', paddingTop:'200px'}}>
                     <button onClick={() => setLogin(false)}>Register</button>
                     <button onClick={() => setLogin(true)}>Login</button>
                     <div style={{display:!login? "block":"none"}}>
                         <div className="d-flex flex-column mt-5 " style={{height:'500px', paddingTop:'20px'}} >
                             <p className='h3'>Enter detail to Register</p>
-                            <label htmlFor="name"> Full Name</label>
-                            <input type="text" id="name" name="name" value={author.name} onChange={(e) => setAuthor({...author,name:e.target.value})}/>
-                            <label htmlFor="email">Email</label>
-                            <input type="text" id="email" name="email" value={author.email} onChange={(e) => setAuthor({...author,email:e.target.value})}/>
+                            <label  htmlFor="name"> Full Name *</label>
+                            <input required type="text" id="name" name="name" value={author.name} onChange={(e) => setAuthor({...author,name:e.target.value})}/>
+                            <label  htmlFor="email">Email *</label>
+                            <input required type="text" id="email" name="email" value={author.email} onChange={(e) => setAuthor({...author,email:e.target.value})}/>
+                            <label htmlFor="pw">Password *</label>
+                            <input required type="password" id="pw" name="email" value={author.password} onChange={(e) => setAuthor({...author,password:e.target.value})}/>
+                            <label htmlFor="rePw">Re Password *</label>
+                            <input required type="password" id="rePw" name="email" value={author.password} onChange={(e) => setAuthor({...author,password:e.target.value})}/>
                             <div className='mt-4 m-auto'>
                             <span className='btn btn-outline-primary' onClick={(e) => createAuthor(e)}>Confirm</span>
                             </div>
