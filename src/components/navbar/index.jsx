@@ -22,7 +22,7 @@ state = {
 }
 
   componentDidMount = () =>{
-    setTimeout(() => {this.fetchAuthor()},200 )
+    setTimeout(() => {this.fetchAuthor()},100 )
     
   }
 
@@ -31,6 +31,7 @@ state = {
       const response = await fetch(`${url}/authors/me`,{headers : { authorization :  localStorage.getItem("token")}})
       if(response.ok) {
         const data = await response.json()
+        console.log(data)
         if(data){
           this.setState({author:data})
         }
@@ -48,7 +49,7 @@ state = {
           
           <div style={{display:myNavigator === "http://localhost:3000/"? "none":"block"}}>
             <div className='d-flex align-items-center' >
-              <img style={{width:'30px'}} src={ "https://www.pavilionweb.com/wp-content/uploads/2017/03/man.png"} alt='user profile' />
+              <img style={{width:'30px'}} src={this.state.author.avatar || "https://www.pavilionweb.com/wp-content/uploads/2017/03/man.png"} alt='user profile' />
                 <span className='m-2'>{this.state.author && this.state.author.name}</span>
                 <Button
                   as={Link}
