@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useLocation,useHistory, useNavigate } from "react-router-dom";
+import OathLogin from "./OathLogin";
+import './login.css'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -77,7 +79,7 @@ const loginFunc = async(e) => {
                     <button onClick={() => setLogin(false)}>Register</button>
                     <button onClick={() => setLogin(true)}>Login</button>
                     <div style={{display:!login? "block":"none"}}>
-                        <div className="d-flex flex-column mt-5 " style={{height:'500px', paddingTop:'20px'}} >
+                        <div className="d-flex flex-column mt-5 " >
                             <p className='h3'>Enter detail to Register</p>
                             <label  htmlFor="name"> Full Name *</label>
                             <input required type="text" id="name" name="name" value={author.name} onChange={(e) => setAuthor({...author,name:e.target.value})}/>
@@ -89,12 +91,13 @@ const loginFunc = async(e) => {
                             <input required type="password" id="rePw" name="email" value={author.password} onChange={(e) => setAuthor({...author,password:e.target.value})}/>
                             <div className='mt-4 m-auto'>
                             <span className='btn btn-outline-primary' onClick={(e) => createAuthor(e)}>Confirm</span>
+                                <OathLogin/>
                             </div>
                         </div>
                     </div>
                     {/* register */}
                     <div style={{display:login? "block":"none"}}>
-                        <div className="d-flex flex-column mt-5 " style={{height:'500px', paddingTop:'20px'}} >
+                        <div className="d-flex flex-column mt-5 " >
                             <p className='h3'>Enter detail to Login</p>
                             <label htmlFor="userName">Email</label>
                             <input type="text" id="userName" name="email" value={userLogin.email} onChange={(e) => setUserLogin({...userLogin,email:e.target.value})}/>
@@ -102,6 +105,7 @@ const loginFunc = async(e) => {
                             <input type="password" id="userName" name="password" value={userLogin.password} onChange={(e) => setUserLogin({...userLogin,password:e.target.value})}/>
                             <div className='mt-4 m-auto'>
                             <span className='btn btn-outline-primary' onClick={(e) => loginFunc(e)}>Confirm</span>
+                                <OathLogin/>
                             </div>
                         </div>
                     </div>

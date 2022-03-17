@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-// import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
 import BlogLike from "../../components/likes/BlogLike";
-// import posts from "../../data/posts.json";
 import "./styles.css";
 import EditBlog from "./EditBlog";
 import AddReviews from "./AddReviews";
-import Loader from "../../Loader";
+
 
 const Blog = (props) => {
 const [blog, setBlog]  = useState({}) 
