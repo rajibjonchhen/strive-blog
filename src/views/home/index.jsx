@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import {  useNavigate, useParams } from "react-router-dom";
+import {  useLocation, useNavigate, useParams } from "react-router-dom";
 import BlogList from "../../components/blog/blog-list";
 import {useQueryParameter} from "../../hooks/useQueryParameter";
 import "./styles.css";
@@ -12,9 +12,10 @@ const token = useQueryParameter({defaultValue:null,key:'token'}) || localStorage
 const [authorized,setAuthorized] = useState(false)
 
 const navigate = useNavigate()
+const location = useLocation()
  
 useEffect(() => {
- 
+  console.log(location.pathname)
   if(token){
     localStorage.setItem("token",token);
     setTimeout(()=>setAuthorized(true),200)

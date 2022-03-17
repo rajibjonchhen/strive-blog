@@ -1,29 +1,18 @@
 import React, { Component, useEffect, useState } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { myNavigator } from "../../hooks/useQueryParameter";
 import "./styles.css";
 
-const myNavigator = ( {defaultValue,key})  => {
-  const [parameter,setParameter]=useState(defaultValue)
-  useEffect(()=>{
-      const location = useLocation()
-        console.log(location.pathname)
-          setParameter(location.pathname)
-  },[window.location.search])
-
-  return parameter
-}
-
-export default class NavBar extends Component {
+ class NavBar extends Component {
 state = {
   author : {}
 }
 
   componentDidMount = () =>{
+   
     setTimeout(() => {this.fetchAuthor()},100 )
-    
   }
 
   fetchAuthor = async() => {
@@ -43,11 +32,11 @@ state = {
     return (
       <Navbar expand="lg" className="blog-navbar" fixed="top">
         <Container className="justify-content-between">
-          <Navbar.Brand as={Link} to="/home">
+          <Navbar.Brand as={Link} to={window.location.href === "http://localhost:3000/"? "/":"/home"}>
             <img className="blog-navbar-brand" alt="logo" src={logo} />
           </Navbar.Brand>
           
-          <div style={{display:myNavigator === "http://localhost:3000/"? "none":"block"}}>
+          <div style={{display: window.location.href === "http://localhost:3000/"? "none":"block"}}>
             <div className='d-flex align-items-center' >
               <img style={{width:'30px'}} src={this.state.author.avatar || "https://www.pavilionweb.com/wp-content/uploads/2017/03/man.png"} alt='user profile' />
                 <span className='m-2'>{this.state.author && this.state.author.name}</span>
@@ -77,3 +66,5 @@ state = {
     );
   }
 }
+
+export default NavBar

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 
 export const useQueryParameter = ( {defaultValue,key})  => {
     const [parameter,setParameter]=useState(defaultValue)
@@ -12,13 +13,14 @@ export const useQueryParameter = ( {defaultValue,key})  => {
     return parameter
 }
 
-export const myNavigator = ( {defaultValue,key})  => {
-    const [parameter,setParameter]=useState(defaultValue)
+export const myNavigator = ()  => {
+    const [parameter,setParameter]=useState()
     useEffect(()=>{
-        const params = new URLSearchParams(window.location.search)
-            setParameter(params.get(key))
-    },[window.location.search])
-
+        const location = useLocation()
+          console.log(location.pathname)
+            setParameter(location.pathname)
+    },[])
+  
     return parameter
-}
+  }
 // export default useQueryParameter
