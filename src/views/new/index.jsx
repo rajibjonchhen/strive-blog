@@ -26,9 +26,6 @@ const [post, setPost] = useState( {
 )
       
 
-
- 
-
   const handleChangeCover = (e) => {
     setCoverImg(e.target.files[0])
     console.log("handleChangeCover ")
