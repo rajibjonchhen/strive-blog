@@ -6,7 +6,7 @@ import Blog from "./views/blog";
 import NewBlogPost from "./views/new";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Error404 from "./Error404";
-import Login from "./components/Login/Login";
+import LoginPage from "./components/Login/LoginPage";
 import MyLayout from "./MyLayout";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
     <BrowserRouter>
       {/* <NavBar /> */}
     <Routes>
-      <Route path="/" exact element={<MyLayout><Login/></MyLayout>} />
+      <Route path="/" exact element={<MyLayout><LoginPage/></MyLayout>} />
       <Route path="/home" exact element={
       <MyLayout><Home/></MyLayout>} />
       <Route path="/blog/:id" exact element={<MyLayout><Blog/></MyLayout>} />
