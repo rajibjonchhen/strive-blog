@@ -11,7 +11,7 @@ const LoginPage = () => {
 
 
     return(<Container >
-            <Row className="d-flex align-items-center" style={{height:'100vh'}}>
+            <Row className="d-flex align-items-center" style={{minHeight:'100vh',paddingTop:'100px'}}>
                 <Col sm={12} md={8} lg={4} className="m-auto">
                 <div className="mt-5">
                    

@@ -37,7 +37,7 @@ useEffect(() => {
     
     const validateForm = (values) =>{
         const errors = {}
-        const regex = /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/
+        const regex =  /\S+@\S+\.\S+/  // /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/
         errors.name = !values.name?  "name is required" : ""
         errors.surname = !values.surname?  "surname is required" : ""
         errors.email = !values.email?  "email is required" : (!regex.test(values.email))? "Email is not valid":""

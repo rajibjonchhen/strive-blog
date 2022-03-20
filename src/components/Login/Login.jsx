@@ -35,7 +35,7 @@ function Login({setLogin}) {
     }
 
     const validateForm = (userLogin) => {
-        const regex = /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/
+        const regex = /\S+@\S+\.\S+/
         const errors = {} 
         errors.email = !userLogin.email? "email is missing" : (!regex.test(userLogin.email))? "Email is not valid":""
         errors.password = !userLogin.password && "password is missing"
@@ -71,9 +71,9 @@ function Login({setLogin}) {
         {/* <pre>{JSON.stringify(loginErr, undefined, 2)}</pre> */}
             
             <Alert variant='danger' style={{display:Object.keys(loginErr).length!==0? 'block':'none'}}>
-                - {loginErr.email}
+                 {loginErr.email}
                 <br/>
-                - {loginErr.password}
+                {loginErr.password}    
             </Alert>
        
        
