@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Alert } from "react-bootstrap";
 const AddReviews = () => {
 const [review, setReview] = useState({
     comment:'',

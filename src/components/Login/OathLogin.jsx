@@ -9,10 +9,10 @@ function OathLogin() {
             <a href="http://localhost:3001/authors/googleLogin">
             <img className='oath-img pointer' src={google} alt="google logo"/>
             </a>
-            <a href="/">
+            <a href="https://www.instagram.com">
             <img className='oath-img pointer' src={insta} alt="insta logo"/>
             </a>
-            <a href="/">
+            <a href="https://www.facebook.com/">
             <img className='oath-img pointer' src={facebook} alt="facebook logo"/>
             </a>
         </div>

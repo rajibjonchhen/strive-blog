@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import {  useLocation, useNavigate, useParams } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import BlogList from "../../components/blog/blog-list";
 import {useQueryParameter} from "../../hooks/useQueryParameter";
 import "./styles.css";

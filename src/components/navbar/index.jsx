@@ -1,8 +1,8 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
-import { myNavigator } from "../../hooks/useQueryParameter";
+// import { myNavigator } from "../../hooks/useQueryParameter";
 import "./styles.css";
 
  class NavBar extends Component {
@@ -12,9 +12,9 @@ state = {
 
   componentDidMount = () =>{
    
-    if(window.location.href !== "http://localhost:3000/"){  
-    setTimeout(() => {this.fetchAuthor()},100 )
-    }
+    // if(window.location.href !== "http://localhost:3000/"){  
+    // setTimeout(() => {this.fetchAuthor()},100 )
+    // }
   }
 
   fetchAuthor = async() => {
