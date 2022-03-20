@@ -1,5 +1,5 @@
 import { Alert } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OathLogin from "./OathLogin";
 
@@ -7,13 +7,20 @@ import OathLogin from "./OathLogin";
 
 function Login({setLogin}) {
 
-  const navigate = useNavigate()
-  const [loginErr, setLoginErr] = useState({})
+    const navigate = useNavigate()
+    const [loginErr, setLoginErr] = useState({})
+    const [isSubmit, setIsSubmit] = useState(false)  
 
     const [userLogin, setUserLogin] = useState({
         email:'',
         password:''
     })
+
+    useEffect(() => {
+        if(Object.keys(loginErr).length === 0 && isSubmit){
+            console.log("I am going to submit")
+        }
+    }, [loginErr])
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -23,12 +30,14 @@ function Login({setLogin}) {
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoginErr(validateForm(userLogin))
+        setIsSubmit(true)
         // loginFunc()
     }
 
     const validateForm = (userLogin) => {
+        const regex = /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/
         const errors = {} 
-        errors.email = !userLogin.email && "email is missing"
+        errors.email = !userLogin.email? "email is missing" : (!regex.test(userLogin.email))? "Email is not valid":""
         errors.password = !userLogin.password && "password is missing"
         return errors
     }

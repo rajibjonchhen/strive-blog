@@ -18,8 +18,9 @@ function Register({ setLogin }) {
   });
 
 useEffect(() => {
-    console.log(formErr)
-    console.log(author)
+   if(Object.keys(formErr).length === 0 && isSubmit ){
+    createAuthor()
+   }
 }) 
 
   const handleChange = (e) => {
@@ -39,7 +40,7 @@ useEffect(() => {
         const regex = /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/
         errors.name = !values.name?  "name is required" : ""
         errors.surname = !values.surname?  "surname is required" : ""
-        errors.email = !values.email?  "email is required" : ""
+        errors.email = !values.email?  "email is required" : (!regex.test(values.email))? "Email is not valid":""
         errors.password = values.password?  (values.password.lenth < 6? "password must be greater than 6 character" : "")  :   "password is required"
         errors.rePassword = !values.rePassword?   "repassword is required" : author.rePassword !==author.password? "Password and rePassword needs to be same" : ""
         console.log(errors)
